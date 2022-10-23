@@ -1,4 +1,4 @@
 package com.example.medicine.auth.view_models
 
-class RegisterSellerViewModel {
+class RegisterChemistViewModel {
 }

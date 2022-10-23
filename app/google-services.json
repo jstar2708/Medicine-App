@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1012267953925",
+    "project_id": "medicine-ffa6b",
+    "storage_bucket": "medicine-ffa6b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012267953925:android:cadd35a7c7247dd925916c",
+        "android_client_info": {
+          "package_name": "com.example.medicine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012267953925-72jpgu51uqkutg9dbv23amntmcha61ba.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medicine",
+            "certificate_hash": "14c6cb46ea0ee6f450e93e667b06275f054161c0"
+          }
+        },
+        {
+          "client_id": "1012267953925-35sfpbj14q3sq59pv30r9crfhli4ag36.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnjqpOBR4RFL2gcvmDpu1FkUH1zfJQziI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012267953925-35sfpbj14q3sq59pv30r9crfhli4ag36.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
