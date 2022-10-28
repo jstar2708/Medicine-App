@@ -1,5 +1,6 @@
 package com.example.medicine.auth
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,7 @@ class OtpActivity : AppCompatActivity() {
     private lateinit var credential: PhoneAuthCredential
     private lateinit var progressDialog: ProgressDialog
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOtpBinding.inflate(layoutInflater)

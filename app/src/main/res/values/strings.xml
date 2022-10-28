@@ -137,6 +137,10 @@
     <string name="total_orders">Total orders</string>
     <string name="code_nverification">Code verification</string>
     <string name="verify">Verify</string>
+    <string name="register_as_a_chemist">Register As A Chemist</string>
+    <string name="shop_name">Shop name</string>
+    <string name="owner_name">Owner name</string>
+    <string name="unique_id">Unique Id</string>
 
     // array for Andaman and Nicobar Islands
 

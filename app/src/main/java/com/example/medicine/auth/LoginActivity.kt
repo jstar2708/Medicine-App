@@ -1,5 +1,6 @@
 package com.example.medicine.auth
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,10 +15,15 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var progressBar: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        progressBar = ProgressDialog(this)
+        progressBar.setTitle("Logging you in")
+        progressBar.setMessage("Wait while we log you in")
 
         loginViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[LoginViewModel::class.java]
 
@@ -39,14 +45,18 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.loginButton.setOnClickListener {
+            progressBar.show()
             if(binding.emailEditText.editText?.text?.isEmpty() == true){
                 Snackbar.make(binding.root, "Email should not be empty", Snackbar.LENGTH_SHORT).show()
+                progressBar.dismiss()
             }
             if(binding.passwordEditText.editText?.text?.length!! < 6){
                 Snackbar.make(binding.root, "Password length must be greater than 6 characters", Snackbar.LENGTH_SHORT).show()
+                progressBar.dismiss()
             }
             else{
                 loginViewModel.signIn(binding.emailEditText.editText!!.text.toString(), binding.passwordEditText.editText!!.text.toString(), intent.getIntExtra("who", 0))
+                progressBar.dismiss()
             }
         }
 

@@ -86,6 +86,7 @@ class RegisterCustomerActivity : AppCompatActivity(), AdapterView.OnItemSelected
 
         binding.alreadyHaveAcc.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra("who", 2)
             startActivity(intent)
             finish()
         }
