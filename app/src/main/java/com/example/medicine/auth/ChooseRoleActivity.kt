@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.medicine.databinding.ActivityChooseRoleBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class ChooseRoleActivity : AppCompatActivity() {
 
@@ -13,6 +14,8 @@ class ChooseRoleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChooseRoleBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
 
         var intent: Intent
         binding.chemist.setOnClickListener {

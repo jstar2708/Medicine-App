@@ -21,11 +21,14 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         progressBar = ProgressDialog(this)
         progressBar.setTitle("Logging you in")
         progressBar.setMessage("Wait while we log you in")
 
         loginViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[LoginViewModel::class.java]
+
 
         loginViewModel.move.observe(this) {
             var intent: Intent
@@ -55,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
                 progressBar.dismiss()
             }
             else{
-                loginViewModel.signIn(binding.emailEditText.editText!!.text.toString(), binding.passwordEditText.editText!!.text.toString(), intent.getIntExtra("who", 0))
+                loginViewModel.signIn(binding.emailEditText.editText!!.text.toString(), binding.passwordEditText.editText!!.text.toString())
                 progressBar.dismiss()
             }
         }

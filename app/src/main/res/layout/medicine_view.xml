@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/medicineMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_more_vert_24"
+        android:backgroundTint="@color/white"
+        android:layout_gravity="end"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/medicineName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Paracetamol"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:padding="5dp"
+            android:drawablePadding="3dp"
+            app:drawableStartCompat="@drawable/medicine" />
+
+        <TextView
+            android:id="@+id/manufactureDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Manufactured on - 22 Mar 2022"
+            android:textColor="@color/black"
+            android:padding="3dp"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            app:drawableLeftCompat="@drawable/manufacture"
+            android:drawablePadding="3dp"/>
+
+        <TextView
+            android:id="@+id/expiryDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Expires on - 22 Mar 2025"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:padding="3dp"
+            app:drawableLeftCompat="@drawable/expiry"
+            android:drawablePadding="3dp"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
