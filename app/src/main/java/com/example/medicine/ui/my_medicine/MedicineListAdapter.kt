@@ -13,7 +13,7 @@ class MedicineListAdapter(private val listener: OnDeleteButtonClick): RecyclerVi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicineViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.medicine_view, parent, false)
         val holder = MedicineViewHolder(view)
-        val popupMenu = PopupMenu(parent.context,view)
+        val popupMenu = PopupMenu(parent.context,holder.medicineMenu)
         val inflater = popupMenu.menuInflater
         popupMenu.setOnMenuItemClickListener {
             if(it.itemId == R.id.delete){
@@ -31,8 +31,8 @@ class MedicineListAdapter(private val listener: OnDeleteButtonClick): RecyclerVi
 
     override fun onBindViewHolder(holder: MedicineViewHolder, position: Int) {
         holder.medicineName.text = arrayList[position].getName()
-        holder.manufactureDate.text = arrayList[position].getManufactureDate()
-        holder.expiryDate.text = arrayList[position].getExpiryDate()
+        holder.manufactureDate.text = "Manufactured on ${arrayList[position].getManufactureDate()}"
+        holder.expiryDate.text = "Expired on ${arrayList[position].getExpiryDate()}"
     }
 
     override fun getItemCount(): Int {

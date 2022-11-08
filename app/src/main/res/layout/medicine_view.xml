@@ -27,9 +27,9 @@
             tools:text="Paracetamol"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:padding="5dp"
+            android:textSize="15sp"
             android:drawablePadding="3dp"
+            android:layout_margin="3dp"
             app:drawableStartCompat="@drawable/medicine" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:textColor="@color/black"
             android:padding="3dp"
             android:layout_gravity="center"
-            android:textSize="16sp"
+            android:textSize="13sp"
             app:drawableLeftCompat="@drawable/manufacture"
             android:drawablePadding="3dp"/>
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             tools:text="Expires on - 22 Mar 2025"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="13sp"
             android:padding="3dp"
             app:drawableLeftCompat="@drawable/expiry"
             android:drawablePadding="3dp"/>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/green_400"
+    android:background="@color/purple_100"
     tools:context="auth.RegisterCustomerActivity">
 
     <LinearLayout
@@ -17,21 +17,17 @@
             android:layout_height="200dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_weight="1"
-                android:src="@drawable/customer" />
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:layout_weight="1.5"
                 android:gravity="center_vertical"
                 android:padding="5dp"
+                android:fontFamily="@font/bubblegum_sans"
+                android:paddingStart="20dp"
                 android:text="@string/register_nas_a_ncustomer"
                 android:textColor="@color/black"
-                android:textSize="27sp"
+                android:textSize="60sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -161,8 +157,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:background="#000000"
                 android:padding="5dp"
+                android:backgroundTint="@color/purple_300"
                 android:text="@string/register" />
 
             <TextView

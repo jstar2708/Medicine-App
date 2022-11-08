@@ -6,12 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.SnapHelper
 import com.example.medicine.databinding.FragmentExpiredBinding
+import com.example.medicine.model.Medicine
+import com.example.medicine.ui.my_medicine.MedicineListAdapter
+import com.example.medicine.ui.my_medicine.OnDeleteButtonClick
+import com.google.android.material.snackbar.Snackbar
 
-class ExpiredFragment : Fragment() {
+class ExpiredFragment : Fragment(), OnDeleteButtonClick {
 
     private var _binding: FragmentExpiredBinding? = null
+    private lateinit var expiredViewModel: ExpiredViewModel
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,21 +30,39 @@ class ExpiredFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val expiredViewModel =
-            ViewModelProvider(this).get(ExpiredViewModel::class.java)
+        expiredViewModel =
+            ViewModelProvider(this)[ExpiredViewModel::class.java]
+
 
         _binding = FragmentExpiredBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        val adapter = MedicineListAdapter(this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
 
-        val textView: TextView = binding.textGallery
-        expiredViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        expiredViewModel.expiredMedicineList.observe(requireActivity(), Observer{
+            adapter.updateDate(it)
+        })
+        expiredViewModel.toast.observe(requireActivity(), Observer{
+            handleToast(it)
+        })
+        expiredViewModel.getExpiredMedicine()
+
         return root
+    }
+
+    private fun handleToast(value: Int) {
+        if(value == 1){
+            Snackbar.make(binding.root, "Error while retrieving medicine list", Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClick(medicine: Medicine) {
+        expiredViewModel.deleteMedicine(medicine.getMedicineId())
     }
 }

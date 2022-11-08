@@ -4,12 +4,14 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.medicine.MainActivity
 import com.example.medicine.auth.view_models.LoginViewModel
 import com.example.medicine.chemist.HomeActivity
 import com.example.medicine.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
 
@@ -29,6 +31,11 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[LoginViewModel::class.java]
 
+        loginViewModel.isUserSignedIn(this)
+
+        loginViewModel.action.observe(this, Observer{
+            handleAction(it)
+        })
 
         loginViewModel.move.observe(this) {
             var intent: Intent
@@ -69,5 +76,19 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
+    }
+
+    private fun handleAction(it: Int) {
+        val intent = when(it){
+            1-> Intent(this, HomeActivity::class.java)
+            2-> Intent(this, MainActivity::class.java)
+            else -> {
+                null
+            }
+        }
+        if(intent != null){
+            startActivity(intent)
+            finish()
+        }
     }
 }

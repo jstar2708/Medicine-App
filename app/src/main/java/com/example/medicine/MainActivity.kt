@@ -2,6 +2,7 @@ package com.example.medicine
 
 import android.os.Bundle
 import android.view.Menu
+import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -12,6 +13,12 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.medicine.databinding.ActivityMainBinding
+import com.example.medicine.model.Customer
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +45,10 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navView.getHeaderView(0).findViewById<TextView>(R.id.userName).text = intent.getStringExtra("name")
+        navView.getHeaderView(0).findViewById<TextView>(R.id.email).text = intent.getStringExtra("email")
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

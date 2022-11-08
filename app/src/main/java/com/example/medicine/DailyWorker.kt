@@ -5,8 +5,12 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.core.graphics.drawable.toBitmap
+import androidx.core.graphics.drawable.toDrawable
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.example.medicine.model.Medicine
@@ -21,6 +25,7 @@ class DailyWorker(private val context: Context, workerParameters: WorkerParamete
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance("https://medicine-ffa6b-default-rtdb.firebaseio.com/")
     private val notificationManager: NotificationManager = applicationContext.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+    private var counter = 0
     private val CHANNEL_ID = "My_channel"
     override fun doWork(): Result {
         val calendar = Calendar.getInstance()
@@ -34,7 +39,7 @@ class DailyWorker(private val context: Context, workerParameters: WorkerParamete
                             if(it?.getExpiryDate() == currentDate){
 
                                 makeNotification(it.getName(), it.getManufactureDate(), it.getMedicineId())
-                             //   moveToExpired(it.getMedicineId(), it)
+                                moveToExpired(it.getMedicineId(), it)
 
                             }
                         }
@@ -56,21 +61,26 @@ class DailyWorker(private val context: Context, workerParameters: WorkerParamete
                 .setSmallIcon(R.drawable.expiry)
                 .setContentText("Hey your medicine $medicineName manufactured on $manufactureDate is expired!")
                 .setContentTitle("Medicine Expired")
-                .setChannelId(CHANNEL_ID)
-                .setStyle(NotificationCompat.BigTextStyle().bigText("Hey your medicine $medicineName manufactured on $manufactureDate is expired!"))
+                .setChannelId(medicineId)
+                .setGroup("Expired")
+                .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.drawable.medicine))
+                .setStyle(NotificationCompat.BigTextStyle())
                 .build()
 
-            notificationManager.createNotificationChannel(NotificationChannel(CHANNEL_ID, "New Channel", NotificationManager.IMPORTANCE_HIGH))
+            notificationManager.createNotificationChannel(NotificationChannel(medicineId, "New Channel", NotificationManager.IMPORTANCE_HIGH))
         } else {
             notification = NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.expiry)
                 .setContentText("Hey your medicine $medicineName manufactured on $manufactureDate is expired!")
                 .setContentTitle("Medicine Expired")
-                .setStyle(NotificationCompat.BigTextStyle().bigText("Hey your medicine $medicineName manufactured on $manufactureDate is expired!"))
+                .setGroup("Expired")
+                .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.drawable.medicine))
+                .setStyle(NotificationCompat.BigTextStyle())
                 .build()
         }
 
-        notificationManager.notify(100, notification)
+        notificationManager.notify(counter, notification)
+        counter++
     }
 
     private fun moveToExpired(id: String, medicine: Medicine){

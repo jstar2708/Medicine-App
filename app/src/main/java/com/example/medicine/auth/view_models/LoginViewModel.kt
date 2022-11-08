@@ -1,8 +1,13 @@
 package com.example.medicine.auth.view_models
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.medicine.MainActivity
+import com.example.medicine.auth.LoginActivity
+import com.example.medicine.chemist.HomeActivity
 import com.example.medicine.model.Chemist
 import com.example.medicine.model.Customer
 import com.google.firebase.auth.FirebaseAuth
@@ -15,6 +20,7 @@ class LoginViewModel: ViewModel(){
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     var move: MutableLiveData<Int> = MutableLiveData(100)
     private val database = FirebaseDatabase.getInstance("https://medicine-ffa6b-default-rtdb.firebaseio.com/")
+    val action: MutableLiveData<Int> = MutableLiveData()
 
     fun signIn(email: String, password: String){
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { it ->
@@ -52,6 +58,41 @@ class LoginViewModel: ViewModel(){
             else{
                 Log.d("LOGIN_ERROR", it.exception?.message.toString())
             }
+        }
+    }
+
+    fun isUserSignedIn(context: Context){
+        var intent: Intent? = null
+        if(auth.currentUser != null){
+            database.reference.child("Chemist").addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.children.forEach {
+                        if(auth.currentUser?.uid.toString() ==it.getValue(Chemist::class.java)?.getUserId()){
+                            action.value = 1
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+
+            database.reference.child("Customer").addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.children.forEach {
+                        if (auth.currentUser?.uid.toString() == it.getValue(Customer::class.java)?.getUserId()){
+                            action.value = 2
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
         }
     }
 

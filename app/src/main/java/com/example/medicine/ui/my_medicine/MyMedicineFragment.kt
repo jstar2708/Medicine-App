@@ -42,6 +42,7 @@ class MyMedicineFragment : Fragment(), OnDeleteButtonClick {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         myMedicineViewModel =
             ViewModelProvider(this)[MyMedicineViewModel::class.java]
 
@@ -57,7 +58,9 @@ class MyMedicineFragment : Fragment(), OnDeleteButtonClick {
         })
 
         myMedicineViewModel.toast.observe(requireActivity(), Observer{
-            handleToast(it)
+            if(it != 0){
+                handleToast(it)
+            }
         })
 
         myMedicineViewModel.getMedicineList()
@@ -133,13 +136,13 @@ class MyMedicineFragment : Fragment(), OnDeleteButtonClick {
     }
 
     private fun handleToast(value: Int){
-        when(value){
-            1-> Snackbar.make(binding.root, "Medicine added", Snackbar.LENGTH_SHORT).show()
-            2-> Snackbar.make(binding.root, "Error while adding", Snackbar.LENGTH_SHORT).show()
-            3-> Snackbar.make(binding.root, "Error while retrieving data", Snackbar.LENGTH_SHORT).show()
-            4-> Snackbar.make(binding.root, "Medicine deleted", Snackbar.LENGTH_SHORT).show()
-            5-> Snackbar.make(binding.root, "Error while deletion", Snackbar.LENGTH_SHORT).show()
-            else-> value
-        }
+            when(value){
+                1-> Snackbar.make(requireActivity().findViewById(R.id.nav_view), "Medicine added", Snackbar.LENGTH_SHORT).show()
+                2-> Snackbar.make(requireActivity().findViewById(R.id.nav_view), "Error while adding", Snackbar.LENGTH_SHORT).show()
+                3-> Snackbar.make(requireActivity().findViewById(R.id.nav_view), "Error while retrieving data", Snackbar.LENGTH_SHORT).show()
+                4-> Snackbar.make(requireActivity().findViewById(R.id.nav_view), "Medicine deleted", Snackbar.LENGTH_SHORT).show()
+                5-> Snackbar.make(requireActivity().findViewById(R.id.nav_view), "Error while deletion", Snackbar.LENGTH_SHORT).show()
+                else-> value
+            }
     }
 }

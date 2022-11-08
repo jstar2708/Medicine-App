@@ -25,7 +25,7 @@ class MyMedicineViewModel : ViewModel() {
 
     fun initializeExpiryWork(context: Context){
         if(auth.currentUser != null){
-            val periodicWorkRequest = PeriodicWorkRequest.Builder(DailyWorker::class.java,15, TimeUnit.MINUTES).addTag(auth.currentUser?.uid.toString()).build()
+            val periodicWorkRequest = PeriodicWorkRequest.Builder(DailyWorker::class.java,10, TimeUnit.HOURS).addTag(auth.currentUser?.uid.toString()).build()
             WorkManager.getInstance(context).enqueueUniquePeriodicWork(auth.currentUser!!.uid, ExistingPeriodicWorkPolicy.KEEP, periodicWorkRequest)
         }
     }
@@ -36,9 +36,11 @@ class MyMedicineViewModel : ViewModel() {
         database.reference.child("Customer").child(auth.currentUser?.uid.toString()).child("My_Medicine").child(medicineId).setValue(medicine).addOnCompleteListener {
             if (it.isSuccessful){
                 toast.value = 1
+                toast.value = 0
             }
             else{
                 toast.value = 2
+                toast.value = 0
             }
         }
     }
@@ -56,6 +58,7 @@ class MyMedicineViewModel : ViewModel() {
 
             override fun onCancelled(error: DatabaseError) {
                 toast.value = 3
+                toast.value = 0
             }
         })
     }
@@ -64,9 +67,11 @@ class MyMedicineViewModel : ViewModel() {
         database.reference.child("Customer").child(auth.currentUser?.uid.toString()).child("My_Medicine").child(medicineId).setValue(null).addOnCompleteListener {
             if(it.isSuccessful){
                 toast.value = 4
+                toast.value = 0
             }
             else{
                 toast.value = 5
+                toast.value = 0
             }
         }
     }

@@ -24,7 +24,7 @@
     <string name="set_8_character_password">Set 8 character password</string>
     <string name="new_to_our_app_sign_up">New to our app? Sign up</string>
     <string name="login">Login</string>
-    <string name="register_nas_a_ncustomer">Register \nAs A \nCustomer</string>
+    <string name="register_nas_a_ncustomer">Register As A Customer</string>
     <string name="name">Name</string>
     <string name="phone_number">Phone Number</string>
     <string name="address">Address</string>
@@ -137,7 +137,7 @@
     <string name="total_orders">Total orders</string>
     <string name="code_nverification">Code verification</string>
     <string name="verify">Verify</string>
-    <string name="register_as_a_chemist">Register As A Chemist</string>
+    <string name="register_as_a_chemist">Register As A\nChemist</string>
     <string name="shop_name">Shop name</string>
     <string name="owner_name">Owner name</string>
     <string name="unique_id">Unique Id</string>
