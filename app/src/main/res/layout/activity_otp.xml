@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/green_400"
+    android:background="@color/purple_100"
     tools:context=".auth.OtpActivity">
 
     <TextView
@@ -60,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/verify"
+            android:backgroundTint="@color/purple_300"
             android:padding="10dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"/>
